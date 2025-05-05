@@ -68,7 +68,14 @@ class ValkeySearch {
   vmsdk::ThreadPool *GetWriterThreadPool() const {
     return writer_thread_pool_.get();
   }
-  void Info(RedisModuleInfoCtx *ctx) const;
+  void Info(RedisModuleInfoCtx *ctx, bool for_crash_report) const;
+
+  static long long BlockSizeGetConfig([[maybe_unused]] const char *config_name,
+                                      [[maybe_unused]] void *priv_data);
+  static int BlockSizeSetConfig([[maybe_unused]] const char *config_name,
+                                long long value,
+                                [[maybe_unused]] void *priv_data,
+                                [[maybe_unused]] RedisModuleString **err);
 
   static long long BlockSizeGetConfig([[maybe_unused]] const char *config_name,
                                       [[maybe_unused]] void *priv_data);
